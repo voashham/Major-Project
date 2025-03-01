@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./micro-logo.jpg" type="image/jpg">
+    <title>Become a Member - Microcosm</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: #333;
+            background-image: url("background.jpg");
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation Styles - Matching Main Page */
+        nav {
+            background-image: url("background.jpg");
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            color: #444;
+            margin: 0 18px;
+            font-weight: 400;
+            font-size: 0.95em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0080ff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 1.5px;
+            background-color: #0080ff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .content-section {
+            padding: 30px 20px;
+            background-image: url("background.jpg");
+            color: #333;
+            margin: 20px auto;
+            border-radius: 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.09);
+            max-width: 1200px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: black;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: 600;
+            color: black;
+            font-size: 1.1em;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 1em;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #fefefe;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #0080ff;
+            box-shadow: 0 0 5px rgba(0, 128, 255, 0.3);
+            outline: none;
+        }
+
+        button {
+            display: inline-block;
+            padding: 14px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            max-width: 200px;
+            align-self: center;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        footer {
+            background-image: url("background.jpg");
+            color: #888;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px 15px;
+            }
+
+            .content-section {
+                padding: 15px;
+                margin: 15px auto;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            form {
+                gap: 15px;
+            }
+
+            input {
+                padding: 10px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            footer {
+                padding: 18px 0;
+                margin-top: 25px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="./index.html">Home</a>
+    </nav>
+
+    <section id="membership" class="content-section">
+        <h2>Become a Member</h2>
+        <form id="registerForm">
+            <label for="regNo">Registration Number</label>
+            <input type="text" id="regNo" name="regNo" required>
+        
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="contact">Contact Number</label>
+            <input type="tel" id="contact" name="contact" required>
+        
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Microcosm. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            const regNo = document.getElementById("regNo").value;
+            const name = document.getElementById("name").value;
+            const contact = document.getElementById("contact").value;
+    
+            fetch("http://localhost:3000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ regNo, name, contact })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    window.location.href = "form.html"; // Redirect to dashboard
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>    
+    
+</body>
+</html>
