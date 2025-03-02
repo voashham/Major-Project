@@ -301,29 +301,31 @@
         }
 
         .roles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers the role cards */
+            align-items: center; /* Ensures vertical alignment */
+            gap: 20px;
         }
 
         .role-card {
-            width: 100%;
-            background-image: url("background.jpg");
-            border: 1px solid #e0e0e0;
-            padding: 30px;
-            border-radius: 8px;
+            width: 280px; /* Adjusted for consistency */
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Ensures internal alignment */
         }
 
         .role-card img {
-            width: 200px; 
-            height: 200px; 
-            object-fit: cover; 
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 10px;
         }
 
         .role-card:hover {
