@@ -12,44 +12,6 @@
             background-image: url("background.jpg");
             color: #333;
         }
-
-        nav {
-            background-image: url("background.jpg");
-            color: white;
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffcc00;
-        }
-
-        .banner {
-            background-image:url("background.jpg") ;
-            color: white;
-            padding: 30px;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -57,92 +19,54 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
             text-align: center;
-            color: #00509e;
-            margin-bottom: 20px;
-            font-size: 2em;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
         th, td {
             padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
         }
-
         th {
-            background-color: #00509e;
+            background-color:gray ;
             color: white;
         }
-
-        td {
-            background-color: #f9f9f9;
+        .icon-btn {
+            cursor: pointer;
+            font-size: 1.2em;
+            margin: 5px;
+            border: none;
+            background: none;
         }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .delete {
+            color: red;
         }
-
-        tr:hover {
-            background-color: #e0e0e0;
+        .approve {
+            color: green;
         }
-
-        button {
-            background-color: #007bc1;
+        .edit {
+            color: blue;
+        }
+        .logout-btn {
+            background-color: gray;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
             font-size: 1.1em;
-            display: block;
-            margin: 20px auto;
-        }
-
-        button:hover {
-            background-color: #00509e;
-        }
-
-        footer {
-            background-color: #00274c;
-            color: white;
-            text-align: center;
-            padding: 15px 0;
             margin-top: 20px;
         }
-
-        footer a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+        .logout-btn:hover {
+            background-color: gray;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="logout.html">Logout</a>
-    </nav>
-
-    <section class="banner">
-        <h2>Welcome to Microcosm Dashboard</h2>
-        <p>Manage and view user information</p>
-    </section>
-
     <div class="container">
         <h2>Registered Users</h2>
         <table>
@@ -151,14 +75,24 @@
                     <th>Registration Number</th>
                     <th>Full Name</th>
                     <th>Contact Number</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tbody id="userTable">
-                <!-- Data will be inserted here dynamically -->
-            </tbody>
+            <tbody id="userTable"></tbody>
         </table>
+        <h2>Final Members List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Registration Number</th>
+                    <th>Full Name</th>
+                    <th>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody id="finalMembers"></tbody>
+        </table>
+        <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             fetch("http://localhost:3000/users")
@@ -166,16 +100,48 @@
                 .then(data => {
                     let tableBody = document.getElementById("userTable");
                     data.forEach(user => {
-                        let row = `<tr>
-                            <td>${user.regNo}</td>
-                            <td>${user.name}</td>
-                            <td>${user.contact}</td>
-                        </tr>`;
-                        tableBody.innerHTML += row;
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td contenteditable="true">${user.regNo}</td>
+                            <td contenteditable="true">${user.name}</td>
+                            <td contenteditable="true">${user.contact}</td>
+                            <td>
+                                <button class="icon-btn edit" onclick="editUser(this)">✎</button>
+                                <button class="icon-btn approve" onclick="approveUser(this)">✔</button>
+                                <button class="icon-btn delete" onclick="deleteUser(this)">✖</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
                     });
                 })
                 .catch(error => console.error("Error fetching data:", error));
         });
+        
+        function deleteUser(button) {
+            let row = button.closest("tr");
+            row.remove();
+        }
+        
+        function approveUser(button) {
+            let row = button.closest("tr");
+            document.getElementById("finalMembers").appendChild(row);
+            row.querySelector(".approve").remove();
+            row.querySelector(".delete").remove();
+            row.querySelector(".edit").remove();
+        }
+        
+        function editUser(button) {
+            let row = button.closest("tr");
+            let cells = row.querySelectorAll("td");
+            cells.forEach(cell => {
+                cell.contentEditable = true;
+            });
+        }
+        
+        function logout() {
+            window.location.href = "login.html";
+        }
     </script>
 </body>
 </html>
+
