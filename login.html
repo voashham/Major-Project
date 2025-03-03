@@ -1,99 +1,158 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./micro-logo.jpg" type="image/jpg">
     <title>Login - Microcosm</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('file:///C:/Users/tanya/OneDrive/PROJECT%20LAB/background.jpg');
+            line-height: 1.7;
             color: #333;
+            background-image: url("background.jpg");
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .login-container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            background-image: url("background.jpg");
+            color: #333;
+            margin: 20px auto;
+            border-radius: 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.09);
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
             text-align: center;
         }
 
-        .login-container h2 {
-            color: #00509e;
-            margin-bottom: 20px;
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: black;
+            text-align: center;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
+            font-weight: 600;
+            color: black;
+            font-size: 1.1em;
             margin-bottom: 5px;
-            font-weight: bold;
-            color: #00509e;
         }
 
         .form-group input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 12px;
             font-size: 1em;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #fefefe;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .form-group input:focus {
-            border-color: #00509e;
+            border-color: #0080ff;
+            box-shadow: 0 0 5px rgba(0, 128, 255, 0.3);
             outline: none;
         }
 
         .login-btn {
+            display: inline-block;
             width: 100%;
-            padding: 10px;
-            background-color: #00509e;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            padding: 14px 30px;
             font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            max-width: 200px;
         }
 
         .login-btn:hover {
-            background-color: #003f7f;
+            background-color: black;
+            color: white;
         }
 
         .error {
-            color: red;
+            color: #ff4444;
             font-size: 0.9em;
             margin-top: 10px;
         }
 
         .footer {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 0.9em;
-            color: #555;
+            color: #888;
         }
 
         .footer a {
-            color: #00509e;
+            color: #0070c9;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer a:hover {
             text-decoration: underline;
+            color: #005cb3;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 15px;
+                margin: 15px;
+                max-width: 100%;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+            }
+
+            .login-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .footer {
+                margin-top: 15px;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="login-container">
