@@ -10,12 +10,31 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            text-align: center;
             background-image: url("background.jpg");
             color: #333;
+        }
+
+        .header-nav {
+            background-image: url("background.jpg");
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #333;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header-logo {
+            max-width: 40px;
+            height: auto;
+            opacity: 0.85;
         }
 
         .gallery-container {
@@ -24,7 +43,7 @@
             gap: 20px;
             padding: 20px;
             max-width: 1200px;
-            width: 100%;
+            margin: 20px auto;
         }
 
         .gallery-item {
@@ -36,7 +55,9 @@
 
         .gallery-item img {
             width: 100%;
-            display: block;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
             transition: transform 0.3s ease;
         }
 
@@ -60,26 +81,54 @@
         .gallery-item:hover .overlay {
             opacity: 1;
         }
+
+        .back-button {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: 600;
+            color: white;
+            background-color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #444;
+        }
     </style>
 </head>
 <body>
-    <div class="gallery-container">
-        <div class="gallery-item">
-            <img src="image1.jpg" alt="Gallery Image 1">
-            <div class="overlay">Image Description 1</div>
-        </div>
-        <div class="gallery-item">
-            <img src="image2.jpg" alt="Gallery Image 2">
-            <div class="overlay">Image Description 2</div>
-        </div>
-        <div class="gallery-item">
-            <img src="image3.jpg" alt="Gallery Image 3">
-            <div class="overlay">Image Description 3</div>
-        </div>
-        <div class="gallery-item">
-            <img src="image4.jpg" alt="Gallery Image 4">
-            <div class="overlay">Image Description 4</div>
+    <div class="header-nav">
+        <div class="header-title">
+            <img src="micro-logo.jpg" alt="Microbiology Logo" class="header-logo">
+            <h1>Gallery - Microcosm</h1>
         </div>
     </div>
+
+    <div class="gallery-container">
+        <div class="gallery-item">
+            <img src="confrence1.jpg" alt="Gallery Image 1">
+            <div class="overlay">Microcosmos Event 1</div>
+        </div>
+        <div class="gallery-item">
+            <img src="confrence2.jpg" alt="Gallery Image 2">
+            <div class="overlay">Microcosmos Event 2</div>
+        </div>
+        <div class="gallery-item">
+            <img src="confrence3.jpg" alt="Gallery Image 3">
+            <div class="overlay">Microcosmos Event 3</div>
+        </div>
+        <div class="gallery-item">
+            <img src="confrence4.jpg" alt="Gallery Image 4">
+            <div class="overlay">Microcosmos Event 4</div>
+        </div>
+    </div>
+
+    <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
 </body>
 </html>
+
