@@ -7,593 +7,651 @@
     <title>Microcosm - Microbiology Association</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif; 
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-            color: #333; 
-            background-image : url("background.jpg") ; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    color: #333;
+    background-image: url("background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-nav {
+    background-color: transparent;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #333;
+    position: sticky;
+    top: -5;
+    z-index: 1000;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    height: 3cm;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.header-title p {
+    margin: 0;
+    font-size: 0.85em;
+    color: #777;
+    line-height: 1.1;
+}
+
+.header-logo {
+    max-width: 40px;
+    height: auto;
+    opacity: 0.85;
+}
+
+.header-logo.sju-logo {
+    width: 18vw;
+    max-width: 180px;
+    max-height: 45px;
+}
+
+.header-logo.dept-logo {
+    max-width: 220px;
+    max-height: 130px;
+    height: auto;
+    opacity: 0.85;
+    border-radius: 20vw;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu a {
+    color: #444;
+    margin: 0 18px;
+    font-weight: 400;
+    font-size: 0.95em;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #0080ff;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 1.5px;
+    background-color: transparent;
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    min-width: 150px;
+    box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.09);
+    z-index: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+}
+
+.dropdown-content a {
+    color: #444;
+    padding: 10px 15px;
+    display: block;
+    text-align: left;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: transparent;
+    color: #222;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: slideDown 0.25s ease forwards;
+    transform-origin: top right;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scaleY(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.4em;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hamburger:hover {
+    color: #333;
+}
+
+.banner {
+    background-color: transparent;
+    color: black;
+    padding: 150px 20px 100px 20px;
+    text-align: center;
+    animation: fadeIn 0.9s ease-out;
+    margin-bottom: 25px;
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+    height: 90vh;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.banner h2 {
+    margin: 0 0 10px 0;
+    font-size: 3em;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.banner p {
+    font-size: 1.2em;
+    color: white;
+}
+
+.banner-carousel {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: auto;
+    max-height: 40vh;
+    overflow: hidden;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    text-align: center;
+}
+
+.carousel-slide {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 1em;
+    line-height: 1.6;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-text {
+    font-size: 1.2em;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.carousel-button {
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 1em;
+    font-weight: 600;
+    color: black;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.content-section {
+    padding: 30px 20px;
+    background-color: transparent;
+    color: #333;
+    border-radius: 0;
+    max-width: 100vw;
+}
+
+.content-section h2 {
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+}
+
+.roles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centers the role cards */
+    align-items: center;
+    /* Ensures vertical alignment */
+    gap: 20px;
+}
+
+.role-card {
+    width: 280px;
+    /* Adjusted for consistency */
+    text-align: center;
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Ensures internal alignment */
+}
+
+.role-card img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.role-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.role-card h3 {
+    margin: 15px 0 8px;
+    color: black;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.role-card p {
+    color: #777;
+    font-size: 0.95em;
+}
+
+.messages {
+    text-align: center;
+}
+
+.messages h2 {
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    font-weight: 600;
+    color: black;
+}
+
+.message-box {
+    max-width: 100%;
+    padding: 30px;
+    margin: 20px 0;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: box-shadow 0.25s ease;
+}
+
+.message-box:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.09);
+}
+
+.message-photo {
+    flex: 0 0 auto;
+    padding-right: 25px;
+}
+
+.message-photo img {
+    max-width: 90px;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+.message-photo img:hover {
+    transform: scale(1.1);
+}
+
+.message-content {
+    flex: 1;
+    text-align: left;
+}
+
+.message-content h3 {
+    margin-top: 0;
+    font-size: 1.3em;
+    color: black;
+    font-weight: 600;
+}
+
+.message-content p {
+    color: #666;
+    font-size: 1em;
+}
+
+.cta-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #0070c9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.cta-link:hover {
+    text-decoration: underline;
+    color: #005cb3;
+}
+
+footer {
+    background-color: transparent;
+    color: #888;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 35px;
+    border-top: 2px solid #e0e0e0;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #0070c9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #005cb3;
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        padding: 10px 15px;
+    }
+
+    .header-title h1 {
+        font-size: 1.2em;
+    }
+
+    .header-title p {
+        font-size: 0.8em;
+    }
+
+    .header-logo.sju-logo {
+        display: none;
+    }
+
+    .header-logo.dept-logo {
+        display: block;
+        max-width: 35px;
+    }
+
+    .header-title {
+        gap: 10px;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: transparent;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.08);
+        padding: 15px;
+        border-top: 1px solid #e0e0e0;
+        border-radius: 0 0 6px 6px;
+        overflow: hidden;
+        animation: slideInNav 0.25s ease forwards;
+        transform-origin: top right;
+    }
+
+    @keyframes slideInNav {
+        from {
+            opacity: 0;
+            transform: translateX(90%) scaleX(0.93);
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
+        to {
+            opacity: 1;
+            transform: translateX(0) scaleX(1);
         }
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    .nav-menu.active {
+        display: flex;
+    }
 
-        .header-nav {
-            background-image: url("background.jpg");
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #333;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 12px 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+    .nav-menu a {
+        margin: 12px 0;
+        text-align: left;
+        font-size: 1em;
+    }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .nav-menu a::after {
+        display: none;
+    }
 
-        .header-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: transparent;
+        padding-left: 15px;
+        border-radius: 0;
+        animation: none;
+    }
 
-        .header-text-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 
-        .header-title h1 {
-            margin: 0;
-            font-size: 1.3em;
-            font-weight: 500;
-            line-height: 1.1;
-        }
+    .dropdown-content a {
+        padding: 8px 15px;
+        color: #777;
+    }
 
-        .header-title p {
-            margin: 0;
-            font-size: 0.85em;
-            color: #777;
-            line-height: 1.1;
-        }
+    .dropdown-content a:hover {
+        color: #333;
+        background-color: transparent;
+    }
 
-        .header-logo {
-            max-width: 40px;
-            height: auto;
-            opacity: 0.85;
-        }
+    .hamburger {
+        display: block;
+    }
 
-        .header-logo.sju-logo {
-            width: 18vw;
-            max-width: 180px;
-            max-height: 45px;
-        }
+    .banner {
+        padding: 100px 15px 70px 15px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
 
-        .header-logo.dept-logo {
-            max-width: 60px;
-            height: auto;
-            opacity: 0.85;
-            border-radius: 20vw;
-        }
+    .banner h2 {
+        font-size: 2em;
+    }
 
-        .nav-menu {
-            display: flex;
-            align-items: center;
-        }
+    .banner p {
+        font-size: 0.95em;
+    }
 
-        .nav-menu a {
-            color: #444;
-            margin: 0 18px;
-            font-weight: 400;
-            font-size: 0.95em;
-            position: relative;
-            transition: color 0.3s ease;
-        }
+    .banner-carousel {
+        width: 100%;
+        max-width: 100%;
+        bottom: 0;
+        left: 0;
+        transform: none;
+        margin: 0;
+        height: auto;
+        max-height: 30vh;
+        padding: 20px;
+        border-radius: 0;
+    }
 
-        .nav-menu a:hover {
-            color: #0080ff;
-        }
+    .carousel-text {
+        font-size: 1em;
+        margin-bottom: 15px;
+    }
 
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0%;
-            height: 1.5px;
-            background-image: url("background.jpg");
-            transition: width 0.3s ease;
-        }
+    .carousel-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
 
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
+    .message-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        border-radius: 6px;
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    .message-photo {
+        padding-right: 0;
+        margin-bottom: 12px;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-image: url("background.jpg");
-            min-width: 150px;
-            box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.09);
-            z-index: 1;
-            border-radius: 6px;
-            overflow: hidden;
-            top: 100%;
-            right: 0;
-            margin-top: 4px;
-        }
+    .message-content {
+        text-align: center;
+    }
 
-        .dropdown-content a {
-            color: #444;
-            padding: 10px 15px;
-            display: block;
-            text-align: left;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+    .messages h2 {
+        font-size: 1.6em;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #f2f2f2;
-            color: #222;
-        }
+    .content-section {
+        padding: 15px;
+        margin: 15px auto;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-            animation: slideDown 0.25s ease forwards;
-            transform-origin: top right;
-        }
+    .roles {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 0;
+        align-items: center;
+        justify-content: center;
+    }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-8px) scaleY(0.97); }
-            to { opacity: 1; transform: translateY(0) scaleY(1); }
-        }
+    .role-card {
+        padding: 18px;
+        border-radius: 6px;
+        width: 100%;
+        max-width: 300px;
+    }
 
-        .hamburger {
-            display: none;
-            font-size: 1.4em;
-            background: none;
-            border: none;
-            color: #555;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .hamburger:hover {
-            color: #333;
-        }
-
-        .banner {
-            background-image: url("background.jpg"); 
-            color: black;
-            padding: 150px 20px 100px 20px; 
-            text-align: center;
-            animation: fadeIn 0.9s ease-out;
-            margin-bottom: 25px;
-            position: relative;
-            border-radius: 0; 
-            overflow: hidden;
-            height: 90vh;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .banner h2 {
-            margin: 0 0 10px 0;
-            font-size: 3em;
-            font-weight: 700; 
-            letter-spacing: -1px; 
-        }
-
-        .banner p {
-            font-size: 1.2em; 
-            color: white; 
-        }
-
-        .banner-carousel {
-            position: absolute;
-            bottom: 0; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background-color: rgba(0, 0, 0, 0.85); 
-            color: white; 
-            padding: 30px; 
-            border-radius: 0; 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
-            width: 100%; 
-            height: auto;
-            max-height: 40vh; 
-            overflow: hidden;
-            border: none;
-            display: flex;
-            flex-direction: column; 
-            justify-content: flex-start;
-            align-items: stretch;
-            text-align: center;
-        }
-
-        .carousel-slide {
-            display: flex;
-            flex-direction: row; 
-            width: auto; 
-            height: 100%; 
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .carousel-item {
-            flex: 0 0 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 20px; 
-            text-align: center;
-            font-size: 1em;
-            line-height: 1.6;
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            height: 100%; 
-        }
-
-        .carousel-text {
-            font-size: 1.2em;
-            line-height: 1.7; 
-            margin-bottom: 25px;
-            color: white;
-        }
-
-        .carousel-button {
-            display: inline-block;
-            padding: 14px 30px; 
-            font-size: 1em; 
-            font-weight: 600; 
-            color: black; 
-            background-color: white; 
-            border: 2px solid black;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .carousel-button:hover {
-            background-color: black; 
-            color: white;
-        }
-
-        .content-section {
-            padding: 30px 20px;
-            background-image: url("background.jpg"); 
-            color: #333; 
-            border-radius: 0; 
-            max-width: 100vw;
-        }
-
-        .content-section h2 {
-            margin-bottom: 25px;
-            font-size: 2.2em;
-            font-weight: 600;
-            color: black;
-            text-align: center;
-        }
-
-        .roles {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* Centers the role cards */
-            align-items: center; /* Ensures vertical alignment */
-            gap: 20px;
-        }
-
-        .role-card {
-            width: 280px; /* Adjusted for consistency */
-            text-align: center;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Ensures internal alignment */
-        }
-
-        .role-card img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .role-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-        }
-
-        .role-card h3 {
-            margin: 15px 0 8px;
-            color: black;
-            font-weight: 600;
-            font-size: 1.2em;
-        }
-
-        .role-card p {
-            color: #777;
-            font-size: 0.95em;
-        }
-
-        .messages {
-            text-align: center;
-        }
-
-        .messages h2 {
-            margin-bottom: 25px;
-            font-size: 2.2em;
-            font-weight: 600;
-            color: black;
-        }
-
-        .message-box {
-            max-width: 100%;
-            padding: 30px;
-            margin: 20px 0;
-            background-image: url("background.jpg");
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            transition: box-shadow 0.25s ease;
-        }
-
-        .message-box:hover {
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.09);
-        }
-
-        .message-photo {
-            flex: 0 0 auto;
-            padding-right: 25px;
-        }
-
-        .message-photo img {
-            max-width: 90px;
-            border-radius: 50%;
-            display: block;
-            transition: transform 0.25s ease;
-        }
-
-        .message-photo img:hover {
-            transform: scale(1.1);
-        }
-
-        .message-content {
-            flex: 1;
-            text-align: left;
-        }
-
-        .message-content h3 {
-            margin-top: 0;
-            font-size: 1.3em;
-            color: black;
-            font-weight: 600;
-        }
-
-        .message-content p {
-            color: #666;
-            font-size: 1em;
-        }
-
-        .cta-link {
-            display: inline-block;
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #0070c9;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .cta-link:hover {
-            text-decoration: underline;
-            color: #005cb3;
-        }
-
-        footer {
-            background-image: url("background.jpg");
-            color: #888;
-            text-align: center;
-            padding: 25px 0;
-            margin-top: 35px; 
-            border-top: 2px solid #e0e0e0; 
-            font-size: 0.9em; 
-        }
-
-        footer a {
-            color: #0070c9;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-            color: #005cb3;
-        }
-
-        @media (max-width: 768px) {
-            .header-nav {
-                padding: 10px 15px;
-            }
-            .header-title h1 {
-                font-size: 1.2em;
-            }
-            .header-title p {
-                font-size: 0.8em;
-            }
-            .header-logo.sju-logo {
-                display: none;
-            }
-            .header-logo.dept-logo {
-                display: block;
-                max-width: 35px;
-            }
-            .header-title {
-                gap: 10px;
-            }
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                position: absolute;
-                top: 100%;
-                right: 0;
-                background-color: rgba(255, 255, 255, 0.97);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                box-shadow: 0 3px 7px rgba(0,0,0,0.08);
-                padding: 15px;
-                border-top: 1px solid #e0e0e0;
-                border-radius: 0 0 6px 6px;
-                overflow: hidden;
-                animation: slideInNav 0.25s ease forwards;
-                transform-origin: top right;
-            }
-
-            @keyframes slideInNav {
-                from { opacity: 0; transform: translateX(90%) scaleX(0.93); }
-                to { opacity: 1; transform: translateX(0) scaleX(1); }
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-            .nav-menu a {
-                margin: 12px 0;
-                text-align: left;
-                font-size: 1em;
-            }
-            .nav-menu a::after {
-                display: none;
-            }
-
-            .dropdown-content {
-                position: static;
-                box-shadow: none;
-                background-color: transparent;
-                padding-left: 15px;
-                border-radius: 0;
-                animation: none;
-            }
-            .dropdown:hover .dropdown-content {
-                display: block;
-            }
-            .dropdown-content a {
-                padding: 8px 15px;
-                color: #777;
-            }
-            .dropdown-content a:hover {
-                color: #333;
-                background-color: #f0f0f0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .banner {
-                padding: 100px 15px 70px 15px; 
-                margin-bottom: 20px;
-                border-radius: 6px;
-            }
-            .banner h2 {
-                font-size: 2em;
-            }
-            .banner p {
-                font-size: 0.95em;
-            }
-            .banner-carousel {
-                width: 100%; 
-                max-width: 100%; 
-                bottom: 0; 
-                left: 0; 
-                transform: none;
-                margin: 0; 
-                height: auto;
-                max-height: 30vh; 
-                padding: 20px;
-                border-radius: 0; 
-            }
-            .carousel-text {
-                font-size: 1em;
-                margin-bottom: 15px;
-            }
-            .carousel-button {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-            .message-box {
-                flex-direction: column;
-                text-align: center;
-                padding: 15px;
-                border-radius: 6px;
-            }
-            .message-photo {
-                padding-right: 0;
-                margin-bottom: 12px;
-            }
-            .message-content {
-                text-align: center;
-            }
-            .messages h2 {
-                font-size: 1.6em;
-            }
-            .content-section {
-                padding: 15px;
-                margin: 15px auto;
-                border-radius: 8px;
-                justify-content: center;
-                align-items: center;
-            }
-            .roles {
-                grid-template-columns: 1fr; 
-                gap: 20px;
-                padding: 20px 0;
-                align-items: center;
-                justify-content: center;
-            }
-            .role-card {
-                padding: 18px;
-                border-radius: 6px;
-                width: 100%;
-                max-width: 300px;
-            }
-            footer {
-                padding: 18px 0;
-                margin-top: 25px;
-                border-top: none;
-                background-image: url("background.jpg");
-            }
-        }
+    footer {
+        padding: 18px 0;
+        margin-top: 25px;
+        border-top: none;
+        background-color: transparent;
+    }
+} 
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -601,10 +659,9 @@
     <div class="header-nav">
         <div class="header-content">
             <div class="header-title">
-                <img src="./logo.webp" alt="SJU Logo" class="header-logo sju-logo">
                 <div class="header-text-container">
                 </div>
-                <img src="./micro-logo.png" alt="Microbiology Logo" class="header-logo dept-logo">
+                <a href="https://www.sju.edu.in"><img src="./micro-logo.png" alt="Microbiology Logo" class="header-logo dept-logo"></a>
             </div>
             <button class="hamburger">☰</button>
             <nav class="nav-menu">
