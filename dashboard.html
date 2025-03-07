@@ -3,66 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
     <title>Dashboard - Microcosm</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            line-height: 1.7;
+            color: white;
             background-image: url("background.jpg");
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
             text-align: center;
         }
+        
+        .container {
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+        
+        h2 {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             margin-bottom: 20px;
         }
+        
         th, td {
             padding: 12px;
             text-align: center;
-            border: 1px solid #ddd;
+            border: 1px solid white;
+            color: white;
         }
+        
         th {
-            background-color:gray ;
-            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
         }
-        .icon-btn {
-            cursor: pointer;
-            font-size: 1.2em;
-            margin: 5px;
-            border: none;
-            background: none;
-        }
-        .delete {
-            color: red;
-        }
-        .approve {
-            color: green;
-        }
-        .edit {
-            color: blue;
-        }
+        
         .logout-btn {
-            background-color: gray;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1em;
-            margin-top: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+        
         .logout-btn:hover {
-            background-color: gray;
+            background-color: black;
+            color: white;
+        }
+        
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
         }
     </style>
 </head>
@@ -93,6 +123,12 @@
         </table>
         <button class="logout-btn" onclick="logout()">Logout</button>
     </div>
+    
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
+    
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             fetch("http://localhost:3000/users")
@@ -144,4 +180,3 @@
     </script>
 </body>
 </html>
-
