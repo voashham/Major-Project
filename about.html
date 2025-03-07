@@ -10,34 +10,79 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            line-height: 1.7;
+            color: white;
             background-image: url("background.jpg");
-            color: #333;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
             text-align: center;
         }
-
+        
         .about-container {
             max-width: 800px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.75);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.09);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
         }
-
+        
         h2 {
             font-size: 2.2em;
             font-weight: 600;
-            color: black;
+            color: white;
             margin-bottom: 15px;
         }
-
+        
         p {
             font-size: 1.1em;
             line-height: 1.7;
-            color: #555;
+            color: white;
+        }
+        
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .home-button:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
         }
     </style>
 </head>
@@ -45,6 +90,12 @@
     <div class="about-container">
         <h2>About Microcosm</h2>
         <p>Microcosm is the Microbiology Association of St. Joseph's University, dedicated to fostering scientific curiosity and knowledge-sharing among students and faculty. Through engaging events, workshops, and research initiatives, we aim to create a vibrant learning community.</p>
+        <a href="index.html" class="home-button">Home</a>
     </div>
+    
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
 </body>
 </html>
