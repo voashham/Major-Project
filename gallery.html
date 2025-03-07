@@ -12,29 +12,11 @@
             padding: 0;
             text-align: center;
             background-image: url("background.jpg");
-            color: #333;
-        }
-
-        .header-nav {
-            background-image: url("background.jpg");
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #333;
-            padding: 12px 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .header-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .header-logo {
-            max-width: 40px;
-            height: auto;
-            opacity: 0.85;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: white;
         }
 
         .gallery-container {
@@ -82,33 +64,48 @@
             opacity: 1;
         }
 
-        .back-button {
+        .home-button {
             display: inline-block;
-            margin: 20px;
-            padding: 10px 20px;
+            margin-top: 20px;
+            padding: 12px 24px;
             font-size: 1em;
             font-weight: 600;
-            color: white;
-            background-color: black;
-            border: none;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
         }
-
-        .back-button:hover {
-            background-color: #444;
+        
+        .home-button:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+        
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
         }
     </style>
 </head>
 <body>
-    <div class="header-nav">
-        <div class="header-title">
-            <img src="micro-logo.png" alt="Microbiology Logo" class="header-logo">
-            <h1>Gallery - Microcosm</h1>
-        </div>
-    </div>
-
     <div class="gallery-container">
         <div class="gallery-item">
             <img src="confrence1.jpg" alt="Gallery Image 1">
@@ -128,7 +125,11 @@
         </div>
     </div>
 
-    <button class="back-button" onclick="window.location.href='index.html'">Back to Home</button>
+    <a href="index.html" class="home-button">Home</a>
+
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
 </body>
 </html>
-
