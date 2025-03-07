@@ -31,16 +31,16 @@
         }
 
         .header-nav {
-            background-color: transparent;
+            background-image: url("background.jpg");
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #333;
             position: sticky;
-            top: -5;
+            top: 0;
             z-index: 1000;
-            padding: 12px 20px;
-            border-bottom: 1px solid #e0e0e0;
-            height: 3cm;
+            padding: 10px 20px;
+            border-bottom: transparent;
+            height: 2.5cm;
         }
 
         .header-content {
@@ -54,7 +54,7 @@
         .header-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
         .header-text-container {
@@ -78,20 +78,19 @@
         }
 
         .header-logo {
-            max-width: 40px;
+            max-width: 60px;
             height: auto;
             opacity: 0.85;
         }
 
         .header-logo.sju-logo {
             width: 18vw;
-            max-width: 180px;
-            max-height: 45px;
+            max-width: 220px;
+            max-height: 55px;
         }
 
         .header-logo.dept-logo {
-            max-width: 220px;
-            max-height: 130px;
+            max-width: 80px;
             height: auto;
             opacity: 0.85;
             border-radius: 20vw;
@@ -465,8 +464,7 @@
 
         @media (max-width: 768px) {
             .header-nav {
-                padding: 8px 12px;
-                height: auto;
+                padding: 10px 15px;
             }
 
             .header-title h1 {
@@ -484,7 +482,6 @@
             .header-logo.dept-logo {
                 display: block;
                 max-width: 35px;
-                height: auto;
             }
 
             .header-title {
@@ -650,6 +647,30 @@
                 background-image: url("background.jpg");
             }
         }
+
+        #sub-committee {
+            margin-top: 40px;
+            /* Adds space between Council Roles and Sub-Committee */
+        }
+
+        #sub-committee h2 {
+            color: black;
+            /* Ensures heading visibility */
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+
+        #sub-committee .role-card {
+            background: #f2f2f2;
+            /* Slightly different background for contrast */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #sub-committee .role-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -658,10 +679,12 @@
     <div class="header-nav">
         <div class="header-content">
             <div class="header-title">
+                <a href="https://www.sju.edu.in"><img src="./logo.webp" alt="st-joseph-university"
+                    class="header-logo sju-logo"></a>
                 <div class="header-text-container">
                 </div>
                 <a href="https://www.sju.edu.in"><img src="./micro-logo.png" alt="Microbiology Logo"
-                        class="header-logo dept-logo"></a>
+                        class="header-logo dept-logo"></a>       
             </div>
             <button class="hamburger">☰</button>
             <nav class="nav-menu">
@@ -671,7 +694,8 @@
                     <div class="dropdown-content">
                         <a href="about.html">About</a>
                         <a href="#roles">View Team</a>
-                        <a href="form.html" target="_blank">Become a Member</a>
+                        <a href="#sub-committee">Sub-Commitee</a>
+                        <a href="form.html">Become a Member</a>
                     </div>
                 </div>
                 <a href="#messages">Messages</a>
@@ -679,12 +703,12 @@
                     <a href="#">More</a>
                     <div class="dropdown-content">
                         <a href="gallery.html">Gallery</a>
-                        <a href="Previous.html">Previous Office Bearers</a>
                         <a href="news.html">News</a>
                         <a href="events.html">Events</a>
                         <a href="login.html">Login</a>
                     </div>
                 </div>
+                <a href="https://www.sju.edu.in/departments/st-joseph-university/school-of-life-sciences/microbiology">Department</a>
             </nav>
         </div>
     </div>
@@ -710,7 +734,7 @@
                     <p class="carousel-text">Passionate about Microbiology? Join our dynamic team and contribute to
                         exciting initiatives!</p>
                     <div>
-                        <a href="form.html" target="_blank" class="carousel-button">Join Us</a>
+                        <a href="form.html" class="carousel-button">Join Us</a>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -762,6 +786,43 @@
             </div>
         </div>
     </section>
+
+    <section id="sub-committee" class="content-section">
+        <h2>Sub-Committee</h2>
+        <div class="roles">
+            <div class="role-card">
+                <img src="social_media_cohead1.jpg" alt="Social Media Co-Head">
+                <h3>Social Media Co-Head</h3>
+                <p>Manages online presence and updates.</p>
+            </div>
+            <div class="role-card">
+                <img src="creative_head.jpg" alt="Creative Head">
+                <h3>Creative Head</h3>
+                <p>Oversees content creation and design.</p>
+            </div>
+            <div class="role-card">
+                <img src="event_management.jpg" alt="Event Management Head">
+                <h3>Event Management Head</h3>
+                <p>Plans and executes association events.</p>
+            </div>
+            <div class="role-card">
+                <img src="social_media_cohead2.jpg" alt="Social Media Co-Head 2">
+                <h3>Social Media Co-Head 2</h3>
+                <p>Assists in social media strategies.</p>
+            </div>
+            <div class="role-card">
+                <img src="co_treasurer.jpg" alt="Co-Treasurer">
+                <h3>Co-Treasurer</h3>
+                <p>Helps manage financial records.</p>
+            </div>
+            <div class="role-card">
+                <img src="video_editing.jpg" alt="Video Editing Head">
+                <h3>Video Editing Head</h3>
+                <p>Handles video content for promotions.</p>
+            </div>
+        </div>
+    </section>
+
 
     <section id="messages" class="content-section messages">
         <h2>Messages</h2>
@@ -827,5 +888,7 @@
         setInterval(nextSlide, slideInterval);
     </script>
 </body>
+
+</html>
 
 </html>
