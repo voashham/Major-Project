@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,24 @@
     <title>Microcosm - Microbiology Association</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif; 
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.7;
-            color: #333; 
-            background-image : url("background.jpg") ; 
+            color: white;
+            background-image: url("background.jpg");
             background-size: cover;
-            background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
-            height: 100vh;
-            width: 100vw;
+            background-repeat: no-repeat;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
 
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
@@ -34,15 +35,16 @@
         }
 
         .header-nav {
-            background-image: url("");
-            backdrop-filter: blur(12px);
+            background-color: rgba(168, 175, 176, 0.785);
+            backdrop-filter: blur(3px);
             -webkit-backdrop-filter: blur(12px);
-            color: #fbf8f8;
+            color: black;
             position: sticky;
             top: 0;
             z-index: 1000;
-            padding: 12px 20px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 20px;
+            border-bottom: transparent;
+            height: 2.5cm;
         }
 
         .header-content {
@@ -75,24 +77,24 @@
         .header-title p {
             margin: 0;
             font-size: 0.85em;
-            color: #f8f4f4;
+            color: black;
             line-height: 1.1;
         }
 
         .header-logo {
-            max-width: 40px;
+            max-width: 60px;
             height: auto;
             opacity: 0.85;
         }
 
         .header-logo.sju-logo {
             width: 18vw;
-            max-width: 180px;
-            max-height: 45px;
+            max-width: 220px;
+            max-height: 55px;
         }
 
         .header-logo.dept-logo {
-            max-width: 60px;
+            max-width: 80px;
             height: auto;
             opacity: 0.85;
             border-radius: 20vw;
@@ -104,7 +106,7 @@
         }
 
         .nav-menu a {
-            color: #f9f6f6;
+            color: black;
             margin: 0 18px;
             font-weight: 400;
             font-size: 0.95em;
@@ -123,7 +125,7 @@
             left: 0;
             width: 0%;
             height: 1.5px;
-            background-image: url("");
+            background-color: transparent;
             transition: width 0.3s ease;
         }
 
@@ -139,9 +141,9 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: lightgray;
+            background-color: transparent;
             min-width: 150px;
-            box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.09);
+            box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.09);
             z-index: 1;
             border-radius: 6px;
             overflow: hidden;
@@ -151,7 +153,7 @@
         }
 
         .dropdown-content a {
-            color: black;
+            color: white;
             padding: 10px 15px;
             display: block;
             text-align: left;
@@ -160,8 +162,8 @@
         }
 
         .dropdown-content a:hover {
-            background-color: #f2f2f2;
-            color: #222;
+            background-color: black;
+            color: white;
         }
 
         .dropdown:hover .dropdown-content {
@@ -171,8 +173,15 @@
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-8px) scaleY(0.97); }
-            to { opacity: 1; transform: translateY(0) scaleY(1); }
+            from {
+                opacity: 0;
+                transform: translateY(-8px) scaleY(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scaleY(1);
+            }
         }
 
         .hamburger {
@@ -180,62 +189,69 @@
             font-size: 1.4em;
             background: none;
             border: none;
-            color: #555;
+            color:white;
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
         .hamburger:hover {
-            color: #333;
+            color: white;
         }
 
         .banner {
-            background-image: url(""); 
-            color: rgb(236, 232, 232);
-            padding: 150px 20px 100px 20px; 
+            background-color: transparent;
+            color: white;
+            padding: 150px 20px 100px 20px;
             text-align: center;
             animation: fadeIn 0.9s ease-out;
             margin-bottom: 25px;
             position: relative;
-            border-radius: 0; 
+            border-radius: 0;
             overflow: hidden;
             height: 90vh;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .banner h2 {
             margin: 0 0 10px 0;
             font-size: 3em;
-            font-weight: 700; 
-            letter-spacing: -1px; 
+            font-weight: 700;
+            letter-spacing: -1px;
         }
 
         .banner p {
-            font-size: 1.2em; 
-            color: white; 
+            font-size: 1.2em;
+            color: white;
         }
 
         .banner-carousel {
             position: absolute;
-            bottom: 0; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            background-color: rgba(0, 0, 0, 0.85); 
-            color: white; 
-            padding: 30px; 
-            border-radius: 0; 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
-            width: 100%; 
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 30px;
+            border-radius: 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
             height: auto;
-            max-height: 40vh; 
+            max-height: 40vh;
             overflow: hidden;
             border: none;
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             justify-content: flex-start;
             align-items: stretch;
             text-align: center;
@@ -243,9 +259,9 @@
 
         .carousel-slide {
             display: flex;
-            flex-direction: row; 
-            width: auto; 
-            height: 100%; 
+            flex-direction: row;
+            width: auto;
+            height: 100%;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -255,30 +271,30 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 10px 20px; 
+            padding: 10px 20px;
             text-align: center;
             font-size: 1em;
             line-height: 1.6;
             overflow: hidden;
             position: relative;
             width: 100%;
-            height: 100%; 
+            height: 100%;
         }
 
         .carousel-text {
             font-size: 1.2em;
-            line-height: 1.7; 
+            line-height: 1.7;
             margin-bottom: 25px;
             color: white;
         }
 
         .carousel-button {
             display: inline-block;
-            padding: 14px 30px; 
-            font-size: 1em; 
-            font-weight: 600; 
-            color: black; 
-            background-color: white; 
+            padding: 14px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
             border: 2px solid black;
             border-radius: 8px;
             cursor: pointer;
@@ -286,15 +302,15 @@
         }
 
         .carousel-button:hover {
-            background-color: black; 
+            background-color: black;
             color: white;
         }
 
         .content-section {
             padding: 30px 20px;
-            background-image: url(""); 
-            color: #333; 
-            border-radius: 0; 
+            background-color: transparent;
+            color: white;
+            border-radius: 0;
             max-width: 100vw;
         }
 
@@ -302,28 +318,32 @@
             margin-bottom: 25px;
             font-size: 2.2em;
             font-weight: 600;
-            color: rgb(242, 234, 234);
+            color: white;
             text-align: center;
         }
 
         .roles {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; 
-            align-items: center; 
+            justify-content: center;
+            /* Centers the role cards */
+            align-items: center;
+            /* Ensures vertical alignment */
             gap: 20px;
         }
 
         .role-card {
-            width: 280px; 
+            width: 280px;
+            /* Adjusted for consistency */
             text-align: center;
-            background: hsla(0, 4%, 5%, 0.6);
+            background: #f9f9f9;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            align-items: center; 
+            align-items: center;
+            /* Ensures internal alignment */
         }
 
         .role-card img {
@@ -331,7 +351,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 10px;
         }
 
         .role-card:hover {
@@ -341,13 +361,13 @@
 
         .role-card h3 {
             margin: 15px 0 8px;
-            color: rgb(246, 243, 243);
+            color: black;
             font-weight: 600;
             font-size: 1.2em;
         }
 
         .role-card p {
-            color: #f2efef;
+            color: black;
             font-size: 0.95em;
         }
 
@@ -359,16 +379,16 @@
             margin-bottom: 25px;
             font-size: 2.2em;
             font-weight: 600;
-            color: rgb(254, 252, 252);
+            color: white;
         }
 
         .message-box {
             max-width: 100%;
             padding: 30px;
             margin: 20px 0;
-            background: rgba(13, 11, 11, 0.651);
+            background-color: transparent;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             transition: box-shadow 0.25s ease;
@@ -402,12 +422,12 @@
         .message-content h3 {
             margin-top: 0;
             font-size: 1.3em;
-            color: rgb(240, 236, 236);
+            color: white;
             font-weight: 600;
         }
 
         .message-content p {
-            color: #f5f2f2;
+            color: white;
             font-size: 1em;
         }
 
@@ -426,13 +446,13 @@
         }
 
         footer {
-            background-image: url("");
-            color: #fdf9f9;
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
             text-align: center;
             padding: 25px 0;
-            margin-top: 35px; 
-            border-top: 2px solid #e0e0e0; 
-            font-size: 0.9em; 
+            margin-top: 35px;
+            border-top: transparent;
+            font-size: 0.9em;
         }
 
         footer a {
@@ -449,23 +469,33 @@
         @media (max-width: 768px) {
             .header-nav {
                 padding: 10px 15px;
+                height: auto;
             }
+
             .header-title h1 {
                 font-size: 1.2em;
             }
+
             .header-title p {
                 font-size: 0.8em;
             }
+
             .header-logo.sju-logo {
-                display: none;
+                display: block;
+                max-width: 72px;
+                height: auto;
             }
+
             .header-logo.dept-logo {
                 display: block;
-                max-width: 35px;
+                max-width: 50px;
+                height: auto;
             }
+
             .header-title {
                 gap: 10px;
             }
+
             .nav-menu {
                 display: none;
                 flex-direction: column;
@@ -476,7 +506,7 @@
                 background-color: rgba(255, 255, 255, 0.97);
                 backdrop-filter: blur(12px);
                 -webkit-backdrop-filter: blur(12px);
-                box-shadow: 0 3px 7px rgba(0,0,0,0.08);
+                box-shadow: 0 3px 7px rgba(0, 0, 0, 0.08);
                 padding: 15px;
                 border-top: 1px solid #e0e0e0;
                 border-radius: 0 0 6px 6px;
@@ -486,18 +516,27 @@
             }
 
             @keyframes slideInNav {
-                from { opacity: 0; transform: translateX(90%) scaleX(0.93); }
-                to { opacity: 1; transform: translateX(0) scaleX(1); }
+                from {
+                    opacity: 0;
+                    transform: translateX(90%) scaleX(0.93);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateX(0) scaleX(1);
+                }
             }
 
             .nav-menu.active {
                 display: flex;
             }
+
             .nav-menu a {
                 margin: 12px 0;
                 text-align: left;
                 font-size: 1em;
             }
+
             .nav-menu a::after {
                 display: none;
             }
@@ -510,13 +549,16 @@
                 border-radius: 0;
                 animation: none;
             }
+
             .dropdown:hover .dropdown-content {
                 display: block;
             }
+
             .dropdown-content a {
                 padding: 8px 15px;
                 color: #777;
             }
+
             .dropdown-content a:hover {
                 color: #333;
                 background-color: #f0f0f0;
@@ -527,52 +569,63 @@
             }
 
             .banner {
-                padding: 100px 15px 70px 15px; 
+                padding: 100px 15px 70px 15px;
                 margin-bottom: 20px;
                 border-radius: 6px;
+                height: 12cm;
             }
+
             .banner h2 {
                 font-size: 2em;
             }
+
             .banner p {
                 font-size: 0.95em;
             }
+
             .banner-carousel {
-                width: 100%; 
-                max-width: 100%; 
-                bottom: 0; 
-                left: 0; 
+                width: 100%;
+                max-width: 100%;
+                bottom: 0;
+                left: 0;
                 transform: none;
-                margin: 0; 
+                margin: 0;
                 height: auto;
-                max-height: 30vh; 
+                max-height: 30vh;
                 padding: 20px;
-                border-radius: 0; 
+                border-radius: 0;
             }
+
             .carousel-text {
                 font-size: 1em;
                 margin-bottom: 15px;
             }
+
             .carousel-button {
                 padding: 10px 20px;
                 font-size: 0.9em;
             }
+
             .message-box {
                 flex-direction: column;
                 text-align: center;
                 padding: 15px;
                 border-radius: 6px;
             }
+
             .message-photo {
                 padding-right: 0;
                 margin-bottom: 12px;
             }
+
             .message-content {
                 text-align: center;
             }
+
             .messages h2 {
                 font-size: 1.6em;
             }
+
             .content-section {
                 padding: 15px;
                 margin: 15px auto;
@@ -580,37 +633,68 @@
                 justify-content: center;
                 align-items: center;
             }
+
             .roles {
-                grid-template-columns: 1fr; 
+                grid-template-columns: 1fr;
                 gap: 20px;
                 padding: 20px 0;
                 align-items: center;
                 justify-content: center;
             }
+
             .role-card {
                 padding: 18px;
                 border-radius: 6px;
                 width: 100%;
                 max-width: 300px;
             }
+
             footer {
                 padding: 18px 0;
                 margin-top: 25px;
                 border-top: none;
-                background-image: url("");
+                background-color: rgba(168, 175, 176, 0.785);
+                color: black;
             }
+        }
+
+        #sub-committee {
+            margin-top: 40px;
+            /* Adds space between Council Roles and Sub-Committee */
+        }
+
+        #sub-committee h2 {
+            color: white;
+            /* Ensures heading visibility */
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+
+        #sub-committee .role-card {
+            background: #f2f2f2;
+            /* Slightly different background for contrast */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #sub-committee .role-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="header-nav">
         <div class="header-content">
             <div class="header-title">
-                <img src="./logo.webp.png" alt="SJU Logo" class="header-logo sju-logo">
+                <a href="https://www.sju.edu.in"><img src="./logo.webp" alt="st-joseph-university"
+                    class="header-logo sju-logo"></a>
                 <div class="header-text-container">
                 </div>
-                <img src="./micro-logo.png" alt="Microbiology Logo" class="header-logo dept-logo">
+                <a href="https://www.sju.edu.in"><img src="./micro-logo.png" alt="Microbiology Logo"
+                        class="header-logo dept-logo"></a>       
             </div>
             <button class="hamburger">☰</button>
             <nav class="nav-menu">
@@ -619,57 +703,63 @@
                     <a href="#roles">Our Team</a>
                     <div class="dropdown-content">
                         <a href="about.html">About</a>
-                        <a href="council.html">View Team</a>
-                        <a href="form.html" target="_blank">Become a Member</a>
+                        <a href="#roles">View Team</a>
+                        <a href="#sub-committee">Sub-Commitee</a>
+                        <a href="form.html">Become a Member</a>
                     </div>
                 </div>
                 <a href="#messages">Messages</a>
+                <a href="https://www.sju.edu.in/departments/st-joseph-university/school-of-life-sciences/microbiology">Department</a>
                 <div class="dropdown">
                     <a href="#">More</a>
                     <div class="dropdown-content">
                         <a href="gallery.html">Gallery</a>
+                        <a href="Previous.html">Previous Office Bearers</a>
                         <a href="news.html">News</a>
                         <a href="events.html">Events</a>
                         <a href="login.html">Login</a>
                     </div>
                 </div>
-                <a href="https://www.sju.edu.in/departments/st-joseph-university/school-of-life-sciences/microbiology" target="_blank">Department</a>
             </nav>
         </div>
     </div>
-    
 
     <section id="home" class="banner">
         <div class="banner-carousel">
             <div class="carousel-slide">
                 <div class="carousel-item">
-                    <p class="carousel-text">Welcome to Microcosm! Explore the fascinating world of microbiology with us.</p>
+                    <p class="carousel-text">Welcome to Microcosm! Explore the fascinating world of microbiology with
+                        us.</p>
                     <div>
                         <a href="#home" class="carousel-button">Learn More</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <p class="carousel-text">Upcoming Seminar: "Advances in Microbial Research" - June 15th. Register Now!</p>
+                    <p class="carousel-text">Upcoming Seminar: "Advances in Microbial Research" - June 15th. Register
+                        Now!</p>
                     <div>
                         <a href="#events" class="carousel-button">Register</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <p class="carousel-text">Passionate about Microbiology? Join our dynamic team and contribute to exciting initiatives!</p>
+                    <p class="carousel-text">Passionate about Microbiology? Join our dynamic team and contribute to
+                        exciting initiatives!</p>
                     <div>
-                        <a href="form.html" target="_blank" class="carousel-button">Join Us</a>
+                        <a href="form.html" class="carousel-button">Join Us</a>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <p class="carousel-text">Follow us on Instagram for daily updates, insights, and behind-the-scenes content!</p>
+                    <p class="carousel-text">Follow us on Instagram for daily updates, insights, and behind-the-scenes
+                        content!</p>
                     <div>
-                        <a href="https://www.instagram.com/microcosm_sju?igsh=cW4xMTU0bmJ4ZHA5" target="_blank" class="carousel-button">Follow on Instagram</a>
+                        <a href="https://www.instagram.com/microcosm_sju?igsh=cW4xMTU0bmJ4ZHA5" target="_blank"
+                            class="carousel-button">Follow on Instagram</a>
                     </div>
                 </div>
             </div>
         </div>
         <h2>Welcome to Microcosm</h2>
-        <p style="color: rgba(241, 241, 241, 0.945);">Fostering innovation and excellence in Microbiology</p>
+        <p style="color: white;">Fostering innovation and excellence in Microbiology</p>
     </section>
 
     <section id="roles" class="content-section">
@@ -678,22 +768,22 @@
             <div class="role-card">
                 <img src="president.jpg" alt="President">
                 <h3>President</h3>
-                <p>Leader of the association, overseeing all activities.</p>
+                <p>Jivin Philip Anish</p>
             </div>
             <div class="role-card">
                 <img src="vice_president.jpg" alt="Vice President">
                 <h3>Vice President</h3>
-                <p>Supports the President and ensures smooth operations.</p>
+                <p>Sai Tanaya</p>
             </div>
             <div class="role-card">
                 <img src="treasurer.jpg" alt="Treasurer">
                 <h3>Treasurer</h3>
-                <p>Manages finances and budgets for the association.</p>
+                <p>Mohith V Nair</p>
             </div>
             <div class="role-card">
                 <img src="co_treasurer.jpg" alt="Co-Treasurer">
                 <h3>Co-Treasurer</h3>
-                <p>Assists the Treasurer in managing funds effectively.</p>
+                <p>Anusmita Acharyya</p>
             </div>
             <div class="role-card">
                 <img src="editor.jpg" alt="Editor">
@@ -707,6 +797,43 @@
             </div>
         </div>
     </section>
+
+    <section id="sub-committee" class="content-section">
+        <h2>Sub-Committee</h2>
+        <div class="roles">
+            <div class="role-card">
+                <img src="social_media_cohead1.jpg" alt="Social Media Co-Head">
+                <h3>Social Media Co-Head</h3>
+                <p>Manages online presence and updates.</p>
+            </div>
+            <div class="role-card">
+                <img src="creative_head.jpg" alt="Creative Head">
+                <h3>Creative Head</h3>
+                <p>Oversees content creation and design.</p>
+            </div>
+            <div class="role-card">
+                <img src="event_management.jpg" alt="Event Management Head">
+                <h3>Event Management Head</h3>
+                <p>Plans and executes association events.</p>
+            </div>
+            <div class="role-card">
+                <img src="social_media_cohead2.jpg" alt="Social Media Co-Head 2">
+                <h3>Social Media Co-Head 2</h3>
+                <p>Assists in social media strategies.</p>
+            </div>
+            <div class="role-card">
+                <img src="co_treasurer.jpg" alt="Co-Treasurer">
+                <h3>Co-Treasurer</h3>
+                <p>Helps manage financial records.</p>
+            </div>
+            <div class="role-card">
+                <img src="video_editing.jpg" alt="Video Editing Head">
+                <h3>Video Editing Head</h3>
+                <p>Handles video content for promotions.</p>
+            </div>
+        </div>
+    </section>
+
 
     <section id="messages" class="content-section messages">
         <h2>Messages</h2>
@@ -745,7 +872,7 @@
     </footer>
 
     <script>
-        document.querySelector('.hamburger').addEventListener('click', function() {
+        document.querySelector('.hamburger').addEventListener('click', function () {
             document.querySelector('.nav-menu').classList.toggle('active');
         });
 
@@ -764,7 +891,7 @@
         function nextSlide() {
             counter++;
             if (counter === carouselItems.length) {
-                counter = 0; 
+                counter = 0;
             }
             carouselSlide.style.transform = `translateX(${-counter * 100}%)`; // Horizontal translation now
         }
@@ -772,4 +899,5 @@
         setInterval(nextSlide, slideInterval);
     </script>
 </body>
+
 </html>
