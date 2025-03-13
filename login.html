@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./micro-logo.jpg" type="image/jpg">
+    <title>Login - Microcosm</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: white;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .login-container {
+            padding: 30px 20px;
+            background-image: url("background.jpg");
+            color: white;
+            margin: 20px auto;
+            border-radius: 0;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.09);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: white;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #fefefe;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #0080ff;
+            box-shadow: 0 0 5px rgba(0, 128, 255, 0.3);
+            outline: none;
+        }
+
+        .login-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            max-width: 200px;
+        }
+
+        .login-btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .home-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .home-button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .error {
+            color: #ff4444;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 15px;
+                margin: 15px;
+                max-width: 100%;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group input {
+                padding: 10px;
+            }
+
+            .login-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .footer {
+                margin-top: 15px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="admin" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p id="message"></p>
+        <div class="error" id="errorMessage"></div>
+
+        <a href="index.html" class="home-button">Home</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const admin = document.getElementById("admin").value;
+            const password = document.getElementById("password").value;
+
+            console.log("Sending:", { admin, password });
+
+            const response = await fetch("http://localhost:3001/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ admin, password })
+            });
+
+            const result = await response.json();
+            console.log("Server Response:", result);
+
+            if (result.success) {
+                window.location.href = "dashboard.html"
+            } else {
+
+                document.getElementById("message").innerText = result.message;
+            }
+        });
+    </script>
+</body>
+
+</html>
