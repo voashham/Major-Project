@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./micro-logo.png" type="image/png">
+    <title>News Management - Microcosm</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: white;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid white;
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        input {
+            margin: 5px;
+            padding: 12px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>News Management</h2>
+        <input id="newsTitle" placeholder="Title">
+        <input id="newsDesc" placeholder="Description">
+        <button onclick="addNews()">Add News</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="newsTable"></tbody>
+        </table>
+
+        <button onclick="logout()">Back</button>
+    </div>
+
+    <script>
+        async function fetchNews() {
+            const response = await fetch("http://localhost:3001/news");
+            const newsList = await response.json();
+            const tableBody = document.getElementById("newsTable");
+            tableBody.innerHTML = "";
+            newsList.forEach(news => {
+                const row = `<tr>
+                    <td>${news.title}</td>
+                    <td>${news.description}</td>
+                    <td><button onclick="deleteNews('${news.id}')">Remove</button></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        async function addNews() {
+            const title = document.getElementById("newsTitle").value;
+            const description = document.getElementById("newsDesc").value;
+            await fetch("http://localhost:3001/news", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description })
+            });
+            alert("News added!");
+            fetchNews();
+        }
+
+        function deleteNews(id) {
+        fetch(`http://localhost:3001/news/${id}`, { method: "DELETE" })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Show alert message
+                console.log(data.message); // Log response
+
+                let item = document.getElementById(`news-${id}`);
+                if (item) {
+                    item.remove();
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+        function logout() {
+            window.location.href = "DashboardIndex.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchNews);
+    </script>
+</body>
+
+</html>

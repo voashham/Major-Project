@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management - Microcosm</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: white;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid white;
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .logout-btn {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
+        }
+
+        input {
+            margin: 5px;
+            padding: 12px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <h2>Event Management - Microcosm</h2>
+
+        <input id="eventTitle" placeholder="Title">
+        <input id="eventDesc" placeholder="Description">
+        <button class="button" onclick="addEvent()">Add Event</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="eventTable"></tbody>
+        </table>
+
+        <button class="button" onclick="logout()">Back</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
+
+    <script>
+        async function fetchEvents() {
+            const response = await fetch("http://localhost:3001/events");
+            const eventList = await response.json();
+            const tableBody = document.getElementById("eventTable");
+            tableBody.innerHTML = "";
+            eventList.forEach(event => {
+                const row = `<tr>
+                    <td>${event.title}</td>
+                    <td>${event.description}</td>
+                    <td><button onclick="deleteEvent('${event.id}')">Remove</button></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        async function addEvent() {
+            const title = document.getElementById("eventTitle").value;
+            const description = document.getElementById("eventDesc").value;
+            await fetch("http://localhost:3001/events", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title, description })
+            });
+            alert("Event added!");
+            fetchEvents();
+        }
+
+        function deleteEvent(id) {
+        fetch(`http://localhost:3001/events/${id}`, { method: "DELETE" })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); 
+                console.log(data.message); 
+
+                let item = document.getElementById(`event-${id}`);
+                if (item) {
+                    item.remove(); 
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+        function logout() {
+            window.location.href = "DashboardIndex.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchEvents);
+    </script>
+</body>
+
+</html>
