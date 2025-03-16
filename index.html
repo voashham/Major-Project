@@ -142,7 +142,7 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color:rgba(168, 175, 176, 0.785) ;
+            background-color: rgba(168, 175, 176, 0.785);
             min-width: 150px;
             box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.09);
             z-index: 1;
@@ -190,7 +190,7 @@
             font-size: 1.4em;
             background: none;
             border: none;
-            color:white;
+            color: white;
             cursor: pointer;
             transition: color 0.3s ease;
         }
@@ -337,7 +337,7 @@
             width: 280px;
             height: 375px;
             text-align: center;
-            background:rgba(168, 175, 176, 0.785) ;
+            background: rgba(168, 175, 176, 0.785);
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -692,11 +692,11 @@
         <div class="header-content">
             <div class="header-title">
                 <a href="https://www.sju.edu.in"><img src="./logo.webp" alt="st-joseph-university"
-                    class="header-logo sju-logo"></a>
+                        class="header-logo sju-logo"></a>
                 <div class="header-text-container">
                 </div>
                 <a href="https://www.sju.edu.in"><img src="./micro-logo.png" alt="Microbiology Logo"
-                        class="header-logo dept-logo"></a>       
+                        class="header-logo dept-logo"></a>
             </div>
             <button class="hamburger">☰</button>
             <nav class="nav-menu">
@@ -721,7 +721,8 @@
                         <a href="login.html">Login</a>
                     </div>
                 </div>
-                <a href="https://www.sju.edu.in/departments/st-joseph-university/school-of-life-sciences/microbiology">Department</a>
+                <a
+                    href="https://www.sju.edu.in/departments/st-joseph-university/school-of-life-sciences/microbiology">Department</a>
             </nav>
         </div>
     </div>
@@ -915,6 +916,48 @@
         }
 
         setInterval(nextSlide, slideInterval);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("http://localhost:3001/carousel")
+                .then(response => response.json())
+                .then(data => {
+                    const carouselSlide = document.querySelector(".carousel-slide");
+                    carouselSlide.innerHTML = ""; // Clear existing slides
+
+                    data.forEach(item => {
+                        const slide = document.createElement("div");
+                        slide.classList.add("carousel-item");
+                        slide.innerHTML = `
+                        <p class="carousel-text">${item.text}</p>
+                        <div>
+                            <a href="${item.link}" class="carousel-button">Learn More</a>
+                        </div>
+                    `;
+                        carouselSlide.appendChild(slide);
+                    });
+
+                    // Restart carousel animation after loading data
+                    startCarousel();
+                })
+                .catch(error => console.error("Error fetching carousel data:", error));
+        });
+
+        function startCarousel() {
+            const carouselSlide = document.querySelector('.carousel-slide');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            let counter = 0;
+            const slideInterval = 3000;
+
+            function nextSlide() {
+                counter++;
+                if (counter >= carouselItems.length) {
+                    counter = 0;
+                }
+                carouselSlide.style.transform = `translateX(${-counter * 100}%)`;
+            }
+
+            setInterval(nextSlide, slideInterval);
+        }
     </script>
 </body>
 
