@@ -172,30 +172,41 @@ app.post("/:type", (req, res) => {
     });
 });
 
-// DELETE news item
 app.delete("/news/:id", (req, res) => {
     const id = req.params.id;
     db.query("DELETE FROM news WHERE id = ?", [id], (err, result) => {
         if (err) {
             res.status(500).json({ message: "Error deleting news", error: err });
+        } else if (result.affectedRows === 0) {
+            res.status(404).json({ message: "News not found" });
         } else {
-            res.json({ message: "News deleted successfully" });
+            res.json({ message: `News with ID ${id} deleted successfully` });
         }
     });
 });
 
-// DELETE event item
 app.delete("/events/:id", (req, res) => {
     const id = req.params.id;
     db.query("DELETE FROM events WHERE id = ?", [id], (err, result) => {
         if (err) {
             res.status(500).json({ message: "Error deleting event", error: err });
+        } else if (result.affectedRows === 0) {
+            res.status(404).json({ message: "Event not found" });
         } else {
-            res.json({ message: "Event deleted successfully" });
+            res.json({ message: `Event with ID ${id} deleted successfully` });
         }
     });
 });
 
+app.get("/carousel", (req, res) => {
+    db.query("SELECT * FROM carousel", (err, results) => {
+        if (err) {
+            res.status(500).json({ message: "Error fetching carousel data", error: err });
+        } else {
+            res.json(results);
+        }
+    });
+});
 
 // Start Server
 app.listen(3001, () => console.log("Server running on port 3001"));
