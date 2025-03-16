@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Dashboard - Microcosm</title>
+    <link rel="icon" href="./micro-logo.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: white;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid white;
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .logout-btn {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
+        }
+
+        input {
+            margin: 5px;
+            padding: 12px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Manage Carousel Items</h2>
+
+    <div class="add-form">
+        <input type="text" id="carouselText" placeholder="Enter carousel text" required>
+        <input type="text" id="carouselLink" placeholder="Enter button link (e.g., #events or URL)" required>
+        <button class="add-btn" onclick="addCarouselItem()">Add Carousel Item</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th>Link</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="carouselTableBody">
+            <!-- Carousel items will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <button class="button" onclick="logout()">Back</button>
+
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
+
+    <script>
+        function fetchCarouselItems() {
+            fetch("http://localhost:3001/carousel")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("carouselTableBody");
+                    tableBody.innerHTML = "";
+
+                    data.forEach(item => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${item.id}</td>
+                            <td>${item.text}</td>
+                            <td>${item.link}</td>
+                            <td><button onclick="deleteCarouselItem(${item.id})">Delete</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching carousel data:", error));
+        }
+
+        function addCarouselItem() {
+            const text = document.getElementById("carouselText").value;
+            const link = document.getElementById("carouselLink").value;
+
+            if (text === "" || link === "") {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            fetch("http://localhost:3001/carousel", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text, link })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchCarouselItems();
+                    document.getElementById("carouselText").value = "";
+                    document.getElementById("carouselLink").value = "";
+                })
+                .catch(error => console.error("Error adding carousel item:", error));
+        }
+
+        function deleteCarouselItem(id) {
+            if (!confirm("Are you sure you want to delete this item?")) return;
+
+            fetch(`http://localhost:3001/carousel/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    fetchCarouselItems();
+                })
+                .catch(error => console.error("Error deleting carousel item:", error));
+        }
+
+        function logout() {
+            window.location.href = "DashboardIndex.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchCarouselItems);
+    </script>
+</body>
+
+</html>
