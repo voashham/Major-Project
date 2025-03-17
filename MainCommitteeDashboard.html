@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./micro-logo.png" type="image/png">
+    <title>Manage Committee - Microcosm</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            color: white;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid white;
+            color: white;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            color: black;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: black;
+            color: white;
+        }
+
+        footer {
+            background-color: rgba(168, 175, 176, 0.785);
+            color: black;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 35px;
+            font-size: 0.9em;
+        }
+
+        input {
+            margin: 5px;
+            padding: 12px;
+        }
+
+        footer a {
+            color: #0070c9;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #005cb3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Manage Main Committee</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Image Path</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="committeeList"></tbody>
+        </table>
+
+    </div>
+
+    <h1>Add New Office Bearer</h1>
+    <input type="text" id="newName" placeholder="Enter Name">
+    <input type="text" id="newRole" placeholder="Enter Role">
+    <input type="text" id="newImagePath" placeholder="Enter Image Path">
+    <button class="btn" onclick="addCommitteeMember()">Add</button>
+
+    <button onclick="logout()">Back</button>
+    <footer>
+        <p>&copy; 2025 Microcosm. All rights reserved.</p>
+        <p>Designed By BCA'25</p>
+    </footer>
+
+    <script>
+        function loadCommitteeMembers() {
+            fetch("http://localhost:3001/getCommittee")
+                .then(response => response.json())
+                .then(data => {
+                    let tableBody = document.getElementById("committeeList");
+                    tableBody.innerHTML = "";
+
+                    data.forEach(member => {
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td><img src="${member.imagePath}" alt="${member.name}" width="50"></td>
+                            <td contenteditable="true" id="name-${member.id}">${member.name}</td>
+                            <td contenteditable="true" id="role-${member.id}">${member.role}</td>
+                            <td contenteditable="true" id="image-${member.id}">${member.imagePath}</td>
+                            <td>
+                                <button class="btn" onclick="updateMember(${member.id})">Update</button>
+                                <button class="btn" onclick="deleteMember(${member.id})">Delete</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error loading committee members:", error));
+        }
+
+        function updateMember(id) {
+            let newName = document.getElementById(`name-${id}`).innerText;
+            let newRole = document.getElementById(`role-${id}`).innerText;
+            let newImagePath = document.getElementById(`image-${id}`).innerText;
+
+            fetch(`http://localhost:3001/updateCommittee/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: newName, role: newRole, imagePath: newImagePath })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadCommitteeMembers();
+                })
+                .catch(error => console.error("Error updating member:", error));
+        }
+
+        function deleteMember(id) {
+            fetch(`http://localhost:3001/deleteCommittee/${id}`, { method: "DELETE" })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadCommitteeMembers();
+                })
+                .catch(error => console.error("Error deleting member:", error));
+        }
+
+        function addCommitteeMember() {
+            let newName = document.getElementById("newName").value;
+            let newRole = document.getElementById("newRole").value;
+            let newImagePath = document.getElementById("newImagePath").value;
+
+            fetch("http://localhost:3001/addCommittee", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name: newName, role: newRole, imagePath: newImagePath })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    loadCommitteeMembers();
+                    document.getElementById("newName").value = "";
+                    document.getElementById("newRole").value = "";
+                    document.getElementById("newImagePath").value = "";
+                })
+                .catch(error => console.error("Error adding member:", error));
+        }
+
+        window.onload = loadCommitteeMembers;
+
+        function logout() {
+            window.location.href = "DashboardIndex.html";
+        }
+    </script>
+
+</body>
+
+</html>
