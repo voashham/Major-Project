@@ -739,123 +739,25 @@
 
     <section id="roles" class="content-section">
         <h2>Faculty Incharge</h2>
-        <div class="roles">
-            <div class="role-card">
-                <img src="StaffCo.jpg" alt="Staff Coordinator">
-                <h3>Dr Debalina Chaudhuri</h3>
-                <p>Staff Coordinator</p>
-            </div>
-            <div class="role-card">
-                <img src="hod.jpg" alt="Head Of Department">
-                <h3>Dr Popy Dutta</h3>
-                <p>Head, Department Of Microbiology</p>
-            </div>
-            <div class="role-card">
-                <img src="dean.jpg" alt="Dean">
-                <h3>Dr Beatrice Maria Sequeira</h3>
-                <p>Dean, School Of Life Sciences</p>
-            </div>
-        </div>
-    </section>
+        <div class="roles" id="facultyContainer"></div>
+    </section>    
 
     <section id="roles" class="content-section">
         <h2>Main Committee</h2>
-        <div class="roles">
-            <div class="role-card">
-                <img src="president.jpg" alt="President">
-                <h3>President</h3>
-                <p>Jivin Philip Anish</p>
-            </div>
-            <div class="role-card">
-                <img src="vice_president.jpg" alt="Vice President">
-                <h3>Vice President</h3>
-                <p>Sai Tanaya</p>
-            </div>
-            <div class="role-card">
-                <img src="treasurer.jpg" alt="Treasurer">
-                <h3>Treasurer</h3>
-                <p>Mohith V Nair</p>
-            </div>
-            <div class="role-card">
-                <img src="co_treasurer.jpg" alt="Co-Treasurer">
-                <h3>Co-Treasurer</h3>
-                <p>Anusmita Acharyya</p>
-            </div>
-            <div class="role-card">
-                <img src="editor.jpg" alt="Editor">
-                <h3>Editor</h3>
-                <p>Shristi Chatterjee</p>
-            </div>
-            <div class="role-card">
-                <img src="co-editor.jpg" alt="Co-Editor">
-                <h3>Co-Editor</h3>
-                <p>Archana Dixit</p>
-            </div>
-        </div>
+        <div class="roles" id="committeeContainer"></div>
     </section>
 
     <section id="sub-committee" class="content-section">
         <h2>Sub-Committee</h2>
-        <div class="roles">
-            <div class="role-card">
-                <img src="social_media_cohead1.jpg" alt="Social Media Co-Head">
-                <h3>Social Media Co-Head</h3>
-                <p>Shuvangi Sinha</p>
-            </div>
-            <div class="role-card">
-                <img src="social_media_cohead2.jpg" alt="Social Media Co-Head 2">
-                <h3>Social Media Co-Head</h3>
-                <p>Ashwini R</p>
-            </div>
-            <div class="role-card">
-                <img src="creative_head.jpg" alt="Creative Head">
-                <h3>Creative Head</h3>
-                <p>Adinah Nourin</p>
-            </div>
-            <div class="role-card">
-                <img src="event_management.jpg" alt="Event Management Head">
-                <h3>Event Management Head</h3>
-                <p>Aniksha kar</p>
-            </div>
-            <div class="role-card">
-                <img src="video_editing.jpg" alt="Video Editing Head">
-                <h3>Video Editing Head</h3>
-                <p>Niharika Bhonsle V</p>
-            </div>
-        </div>
+        <div class="roles" id="subCommitteeContainer"></div>
     </section>
 
 
     <section id="messages" class="content-section messages">
         <h2>Messages</h2>
-        <div class="message-box">
-            <div class="message-photo">
-                <img src="./StaffCo.jpg" alt="Staff Coordinator">
-            </div>
-            <div class="message-content">
-                <h3>Message from Staff Coordinator</h3>
-                <p>Looking forward to supporting and guiding our students to success!</p>
-            </div>
-        </div>
-        <div class="message-box">
-            <div class="message-photo">
-                <img src="./hod.jpg" alt="HOD">
-            </div>
-            <div class="message-content">
-                <h3>Message from HOD</h3>
-                <p>Welcome to the Microcosm association. Together, we achieve excellence.</p>
-            </div>
-        </div>
-        <div class="message-box">
-            <div class="message-photo">
-                <img src="./dean.jpg" alt="Dean">
-            </div>
-            <div class="message-content">
-                <h3>Message from Dean</h3>
-                <p>Excited to see the active participation of students and faculty in Microcosm.</p>
-            </div>
-        </div>
+        <div id="messagesContainer"></div>
     </section>
+    
 
     <footer>
         <p>© 2025 Microcosm. All rights reserved.</p>
@@ -930,6 +832,99 @@
 
             setInterval(nextSlide, slideInterval);
         }
+
+        function loadCommitteeImages() {
+            fetch("http://localhost:3001/getCommitteeImages")
+                .then(response => response.json())
+                .then(data => {
+                    let container = document.getElementById("committeeContainer");
+                    container.innerHTML = ""; // Clear old data
+
+                    data.forEach(member => {
+                        let div = document.createElement("div");
+                        div.classList.add("role-card");
+                        div.innerHTML = `
+                        <img src="${member.imagePath}" alt="${member.name}">
+                        <h3>${member.role}</h3>
+                        <p>${member.name}</p>
+                    `;
+                        container.appendChild(div);
+                    });
+                })
+                .catch(error => console.error("Error loading images:", error));
+        }
+
+        // Load images when page loads
+        window.onload = loadCommitteeImages;
+
+        function loadSubCommittee() {
+            fetch("http://localhost:3001/getSubCommittee")
+                .then(response => response.json())
+                .then(data => {
+                    let container = document.getElementById("subCommitteeContainer");
+                    container.innerHTML = ""; // Clear existing content
+
+                    data.forEach(member => {
+                        let div = document.createElement("div");
+                        div.classList.add("role-card");
+                        div.innerHTML = `
+                            <img src="${member.imagePath}" alt="${member.role}">
+                            <h3>${member.role}</h3>
+                            <p>${member.name}</p>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+                .catch(error => console.error("Error loading Sub Committee members:", error));
+        }
+        function loadFacultyAndMessages() {
+        fetch("http://localhost:3001/getFacultyMessages")
+            .then(response => response.json())
+            .then(data => {
+                let facultyContainer = document.getElementById("facultyContainer");
+                let messagesContainer = document.getElementById("messagesContainer");
+
+                facultyContainer.innerHTML = "";
+                messagesContainer.innerHTML = "";
+
+                data.forEach(member => {
+                    // Display Faculty Incharges
+                    let facultyDiv = document.createElement("div");
+                    facultyDiv.classList.add("role-card");
+                    facultyDiv.innerHTML = `
+                        <img src="${member.imagePath}" alt="${member.role}">
+                        <h3>${member.name}</h3>
+                        <p>${member.role}</p>
+                    `;
+                    facultyContainer.appendChild(facultyDiv);
+
+                    // Display Messages (Only for members with messages)
+                    if (member.message) {
+                        let messageDiv = document.createElement("div");
+                        messageDiv.classList.add("message-box");
+                        messageDiv.innerHTML = `
+                            <div class="message-photo">
+                                <img src="${member.imagePath}" alt="${member.role}">
+                            </div>
+                            <div class="message-content">
+                                <h3>Message from ${member.role}</h3>
+                                <p>${member.message}</p>
+                            </div>
+                        `;
+                        messagesContainer.appendChild(messageDiv);
+                    }
+                });
+            })
+            .catch(error => console.error("Error loading Faculty & Messages:", error));
+    }
+
+        window.onload = function () {
+            loadSubCommittee();
+            loadCommitteeImages();
+            loadFacultyAndMessages();
+        };
+
+
     </script>
 </body>
 
