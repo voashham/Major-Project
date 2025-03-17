@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="icon" href="./micro-logo.png" type="image/png">
     <title>Gallery - Microcosm</title>
     <style>
         body {
@@ -106,24 +107,7 @@
     </style>
 </head>
 <body>
-    <div class="gallery-container">
-        <div class="gallery-item">
-            <img src="confrence1.jpg" alt="Gallery Image 1">
-            <div class="overlay">Microcosmos Event 1</div>
-        </div>
-        <div class="gallery-item">
-            <img src="confrence2.jpg" alt="Gallery Image 2">
-            <div class="overlay">Microcosmos Event 2</div>
-        </div>
-        <div class="gallery-item">
-            <img src="confrence3.jpg" alt="Gallery Image 3">
-            <div class="overlay">Microcosmos Event 3</div>
-        </div>
-        <div class="gallery-item">
-            <img src="confrence4.jpg" alt="Gallery Image 4">
-            <div class="overlay">Microcosmos Event 4</div>
-        </div>
-    </div>
+    <div class="gallery-container" id="galleryContainer"></div>
 
     <a href="index.html" class="home-button">Home</a>
 
@@ -131,5 +115,30 @@
         <p>&copy; 2025 Microcosm. All rights reserved.</p>
         <p>Designed By BCA'25</p>
     </footer>
+    <script>
+        function loadGallery() {
+            fetch("http://localhost:3001/getGallery")
+                .then(response => response.json())
+                .then(data => {
+                    let galleryContainer = document.getElementById("galleryContainer");
+                    galleryContainer.innerHTML = "";
+
+                    data.forEach(image => {
+                        let div = document.createElement("div");
+                        div.classList.add("gallery-item");
+                        div.innerHTML = `
+                            <img src="${image.imagePath}" alt="${image.title}">
+                            <div class="overlay">${image.title}</div>
+                        `;
+                        galleryContainer.appendChild(div);
+                    });
+                })
+                .catch(error => console.error("Error loading gallery images:", error));
+        }
+
+        // Load gallery images when page loads
+        window.onload = loadGallery;
+    </script>
+
 </body>
 </html>
